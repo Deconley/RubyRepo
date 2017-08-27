@@ -1,0 +1,24 @@
+<!-- -options- -->
+<% if session[:user_id] %>
+  |<a href="/logout" data-method="delete">Log out</a>
+  |<a href="/networks/<%= session[:user_id] %>">My Professional Profile</a>
+  |<a href="/users">View folks not in my network</a>
+<% end %>
+<h3><%= current_user.first_name.titleize %> <%= current_user.last_name.titleize %>, These are people you might want to connect with!</h3>
+
+<hr>
+
+<hr>
+<table>
+  <thead>
+    <th>Name |</th>
+    <th>Action </th>
+  <thead>
+  <% @users.each do |user| %>
+  	<tr>
+  		<td><a href="/users/<%= user.id %>" ><%= user.first_name.titleize %></a></td>
+  		<td><a href="/invites/<%= user.id %>" data-method="post">Request to connect</a></td>
+
+  	</tr>
+  	<% end %>
+  </table>
